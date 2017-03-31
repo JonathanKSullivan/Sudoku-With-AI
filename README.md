@@ -3,11 +3,11 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: *We iterate through each position find its peers. we check the peers for Naked Twins. If twins our found we reiterate through the peer group and remove each of the individual twins from the  peers that contain them. Here we use the fact that a naked twin means that those two spaces are the only spaces in a peer group that can contain those values.*
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: *We use 4 methods of contraint propagation to solve the Diagonal Sudoku problem. First we use a technique called Elimination which looks at the solve positions and determine the possible answers for unsolved positions. Second we used Only Choice, which looks at a position peer group and determine if a possibility is unique to its position wiithin a its peer group. If so then we know that the value for that position is that uniquie possibility. Third we used the naked twin approach which is describe above(see Q1; [DRY]). This could be abstracted to higher levels of sibilings; we could implement Naked Triplets, Naked Quadruplets, Naked Quintets, etc. Lastly we wrap all these up in a DFS.*
 
 ### Install
 
