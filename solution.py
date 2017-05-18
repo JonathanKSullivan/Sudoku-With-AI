@@ -8,32 +8,25 @@ board_rows = string.ascii_uppercase[0:9]
 board_cols = string.digits[1:10]
 subboard_rows = [board_rows[0:3], board_rows[3:6],board_rows[6:9]]
 subboard_cols = [board_cols[0:3], board_cols[3:6],board_cols[6:9]]
-subboards = [[ r+c for r in sub_row for c in sub_col] for sub_row in subboard_rows for sub_col in subboard_cols]
-diagonals = [[board_rows[i]+board_cols[i] for i in range(9)], [board_rows[i]+board_cols[8-i] for i in range(9)]]
+subboards = [[r+c for r in sub_row for c in sub_col] for sub_row in subboard_rows \
+              for sub_col in subboard_cols]
+diagonals = [[board_rows[i] + board_cols[i] for i in range(9)], [board_rows[i] + \
+              board_cols[8-i] for i in range(9)]]
 peer_groups = {}
 
+#Creates a list of list of rows
+rows = [ [board_row+board_col for board_col in board_cols] for board_row in board_rows]
 
-#Create a list of list of rows
-rows = []
-for board_row in board_rows:
-    row = []
-    for board_col in board_cols:
-        row.append(board_row+board_col)
-    rows.append(row)
-
-#Create a list of list of column
-cols = []
-for board_col in board_cols:
-    col = []
-    for board_row in board_rows:
-        col.append(board_row+board_col)
-    cols.append(col)
+#Creates a list of list of column
+cols = [[board_row+board_col for board_row in board_rows] for board_col in board_cols]
 
 def strIntersection(s1, s2):
   out = ""
   for c in s1:
     if c in s2 and not c in out:
       out += c
+  print (''.join([c for c in s1 if (c in s2 and not c in out)]), out)
+  return ''.join([c for c in s1 if c in s2 and not c in out])
   return out
 
 def get_all_peer_grp(values):
@@ -109,7 +102,7 @@ def naked_twins(values):
         peer_groups = get_all_peer_grp(values)
     for value in values:
         if (len(values[value]) == 2):
-            peer_group = peer_groups[value] 
+            peer_group = peer_groups[value]
             for peer in peer_group:
                 if ( peer != value ) and ( values[peer] == values[value] ):
                     for cell_to_replace in list(set(peer_groups[value]).intersection(set(peer_groups[peer]))):
@@ -138,7 +131,7 @@ def grid_values(grid):
     for n, box in enumerate(cross(board_cols, board_rows)):
         entry = '123456789' if grid[n] == '.' else grid[n]
         grid_dict[box] = entry
-    
+
     global peer_groups
     peer_groups = get_all_peer_grp(grid_dict)
     return grid_dict
@@ -213,7 +206,7 @@ def only_choice(values):
         #If there is a number not in seen buffer we make it the new value of the target box
         new_value = ''
         for i in values[value]:
-            if i not in seen_buffer:    
+            if i not in seen_buffer:
                 new_value += i
 
         #Assign new value to  box if the value if there is new value is non-empty
