@@ -25,8 +25,8 @@ def strIntersection(s1, s2):
   for c in s1:
     if c in s2 and not c in out:
       out += c
-  print (''.join([c for c in s1 if (c in s2 and not c in out)]), out)
-  return ''.join([c for c in s1 if c in s2 and not c in out])
+  #print (''.join([c for c in s1 if (c in s2 and not c in out)]), out)
+  #return ''.join([c for c in s1 if c in s2 and not c in out])
   return out
 
 def get_all_peer_grp(values):
